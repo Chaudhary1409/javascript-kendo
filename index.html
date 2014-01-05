@@ -8,6 +8,7 @@
 
 		<meta name="description" content="An introduction to Kendo UI JavaScript framework">
 		<meta name="author" content="https://plus.google.com/+GabrieleRabbiosi">
+		<meta name="google-site-verification" content="7e9Q1ZOEXFr2CYeqIvg5kJZwI6lOpmNmWdQuXn0ndsg" />
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -16,6 +17,7 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -28,11 +30,41 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-41055822-4', 'redaemn.github.io');
+			ga('send', 'pageview');
+		</script>
 	</head>
 
 	<body>
 
 		<div class="reveal">
+
+			<div class="fixed-header">
+				<div class="container">
+					<div class="social">
+						<span style="margin-right: 10px;">If you find this presentation useful, <em>please</em> let me know</span>
+
+						<div class="social-buttons">
+							<iframe src="http://ghbtns.com/github-btn.html?user=redaemn&repo=javascript-kendo&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+							
+							<div class="g-plusone" data-annotation="inline" data-width="210"></div>
+
+							<a href="https://twitter.com/share" class="twitter-share-button" data-via="redaemn">Tweet</a>
+						</div>
+					</div>
+
+					<div class="author-info">
+						made with &#9825; by <a href="https://github.com/redaemn" target="_blank">ReDaemn</a> using <a href="https://github.com/hakimel/reveal.js" target="_blank">reveal.js</a>
+					</div>
+				</div>
+			</div>
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
@@ -528,6 +560,20 @@ var reply = {
 				]
 			});
 
+		</script>
+
+		<!-- G+ button -->
+  		<script type="text/javascript">
+    	(function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			})();
+		</script>
+
+		<!-- Twitter button -->
+		<script>
+		!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 		</script>
 
 	</body>
