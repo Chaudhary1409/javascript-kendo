@@ -71,11 +71,6 @@
 				<section>
 					<h1>Kendo UI</h1>
 					<p>an introduction</p>
-
-					<aside class="notes">
-						Despite its popularity, few know that JavaScript is a very nice dynamic object-oriented general-purpose programming language.<br/>
-						You can do anything with it!! (cloud9, this presentation!!)
-					</aside>
 				</section>
 
 				<section>
@@ -86,24 +81,37 @@
 				</section>
 
 				<section>
-					<h2>Using object instead of <br/> function parameters</h2>
-					<p>
-						Widely used pattern
-					</p>
-					<div class="fragment">
-						<p>
-							Instead of doing this:
-						</p>
-						<pre><code data-trim>
+					<section>
+						<h2>Configuration object instead of <br/> function parameters</h2>
+						<ul>
+							<li>widely used pattern</li>
+							<li class="fragment">
+								function definition with many parameters:
+								<pre><code data-trim>
 function createWindow (height, width, animationEnter, animationExit, modal) { /* ... */ }
-						</code></pre>
-					
-					</div>
-					<div class="fragment">
-						<p>
-							It's better to do this:
-						</p>
-						<pre><code data-trim>
+
+var window = createWindow(50, 50, true, true, false);
+								</code></pre>
+							
+							</li>
+							<li class="fragment">
+								when calling the function, the API is cryptic
+							</li>
+							<li class="fragment">
+								parameters must be passed in the correct order, otherwise <strong>bug</strong>
+							</li>
+							<li class="fragment">
+								when the API changes, new parameters can only be added at the end to avoid braking existing code
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Configuration object instead of <br/> function parameters</h2>
+						<div>
+							<p>
+								Use a configuration object instead!
+							</p>
+							<pre><code data-trim>
 function createWindow (config) {
   var defaultConfig = {
     height: 70,
@@ -116,9 +124,48 @@ function createWindow (config) {
   }
 
   config = $.extend({}, defaultConfig, config);
+
+  /* ... */
 }
-						</code></pre>
-					</div>
+
+var window = createWindow({
+  height: 50,
+  width: 50,
+  animation: {
+    enter: true,
+    exit: true
+  }
+});
+							</code></pre>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					Widgets
+					- overview of existing widgets
+					- example about how to instantiate a widget and use it
+				</section>
+
+				<section>
+					Create a custom widget (rating)
+					- example of the patterns saw previously
+				</section>
+
+				<section>
+					MVVM
+				</section>
+
+				<section>
+					Create a custom binding (only refresh)
+				</section>
+
+				<section>
+					Create a custom binding (refresh and change)
+				</section>
+
+				<section>
+					Add MVVM to a custom widget (rating value)
 				</section>
 
 				<section>
