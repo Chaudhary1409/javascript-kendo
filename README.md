@@ -1,4 +1,4 @@
-javascript-introduction
+javascript-kendo
 =======================
 
-An introduction to javascript for newbies
+An introduction to Kendo UI JavaScript framework
