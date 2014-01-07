@@ -142,14 +142,52 @@ var window = createWindow({
 				</section>
 
 				<section>
-					Widgets
-					- overview of existing widgets
-					- example about how to instantiate a widget and use it
+					<h2>The framework</h2>
+					<ul>
+						<li class="fragment">based on <strong>jQuery</strong></li>
+						<li class="fragment">it's more than just widgets:
+							<ul>
+								<li class="fragment"><strong>utilities</strong> (<code>kendo.toString</code>, <code>kendo.parseDate</code>, <code>kendo.parseInt</code>, &hellip;)</li>
+								<li class="fragment"><strong>MVVM</strong></li>
+								<li class="fragment">various features to improve and simplify your code's structure (templates, class inheritance, form validation, &hellip;)</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 
 				<section>
-					Create a custom widget (rating)
-					- example of the patterns saw previously
+					utilities (usage examples of kendo.toString, kendo.parseDate, kendo.parseInt, ...)
+				</section>
+
+				<section>
+					<h2>Widgets</h2>
+					<ul>
+						<li>there are <a href="http://demos.kendoui.com/web/overview/index.html" target="_blank">many existing widgets</a> that you can use out-of-the-box</li>
+						<li class="fragment">
+							how to use a widget:
+							<pre><code data-trim>
+$("#dialog").kendoWindow({
+  height: 600,
+  width: 400,
+  title: "Window title",
+  actions: [ "Close", "Maximize" ],
+  modal: true
+});
+
+var dialog = $("#dialog").data('kendoWindow');
+
+dialog.close();
+							</code></pre>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					form validation
+				</section>
+
+				<section>
+					Create a custom validator
 				</section>
 
 				<section>
@@ -165,391 +203,12 @@ var window = createWindow({
 				</section>
 
 				<section>
+					Create a custom widget (rating)
+					- example of the patterns saw previously
+				</section>
+
+				<section>
 					Add MVVM to a custom widget (rating value)
-				</section>
-
-				<section>
-					<h2>Presentation Objectives</h2>
-					<ul>
-						<li class="fragment">Explain some peculiar concepts about JavaScript, not found in any classical OO language ...</li>
-						<li class="fragment">
-							... so that, at the end of the presentation, you will be able to understand <em>what</em> this code does and <em>why</em> it works
-
-							<pre><code data-trim>
-								/* put some cryptic cod here! */
-							</code></pre>
-						</li>
-					</ul>
-
-					<aside class="notes">
-						At the end of this presentation, you should be able to go out there, pick the source code of a javascript framework (jQuery, Kendo, ...), read it and understand why it works (and hopefully learn much more interesting things!!)
-					</aside>
-				</section>
-
-				<section>
-					<h2 style="text-transform: none;">function()</h2>
-					<ul>
-						<li class="fragment">
-							function declaration
-							<pre style="width: auto;"><code data-trim>
-function diameter(radius) {
-  return 2 * radius;
-}
-							</code></pre>
-						</li>
-						<li class="fragment">
-							function expression
-							<pre style="width: auto;"><code data-trim>
-var diameter = function (radius) {
-  return 2 * radius;
-};
-							</code></pre>
-						</li>
-					</ul>
-
-					<aside class="notes">
-						- functional language, functions are first class citizens<br/>
-						- note the semicolon (;) at the end of the expression
-					</aside>
-				</section>
-
-				<section>
-					<h2 style="text-transform: none;">function.call()</h2>
-					<ul>
-						<li>
-							directly using parentheses
-							<pre><code data-trim>
-diameter(2);
-							</code></pre>
-						</li>
-						<li class="fragment">
-							using <code>Function</code> object methods
-							<pre><code data-trim>
-diameter.call(null, 2);
-diameter.apply(null, [2]);
-							</code></pre>
-						</li>
-						<li class="fragment">
-							The <code>arguments</code> object
-							<pre><code data-trim>
-function test() {
-  console.log(arguments);
-}
-
-test();
-test("a");
-test("a", 5);
-							</code></pre>
-						</li>
-					</ul>
-
-					<aside class="notes">
-						JavaScript performs no check on the number of arguments. Any formal parameter that does not receive an actual value will have undefined as its value.
-					</aside>
-				</section>
-
-				<section>
-					<h2>scope</h2>
-					<ul>
-						<li>
-							NO block scope
-							<pre style="width: auto;"><code data-trim>
-function test() {
-  /* console.log(i);
-  console.log(j); */
-
-  for (var i = 1; i &lt; 5; i++) {
-    var j = i+1;
-  }
-
-  console.log(i);
-  console.log(j);
-}
-
-test();
-							</code></pre>
-						</li>
-						<li class="fragment">
-							just two types of scope
-							<ul>
-								<li>function scope</li>
-								<li>global scope</li>
-							</ul>
-						</li>
-					</ul>
-
-					<aside class="notes">
-						Indeed, a variable is defined even BEFORE its "var" definition, show a demo. We'll see why<br/>
-						We'll see what global scope means in a moment
-					</aside>
-				</section>
-
-				<section>
-					<section>
-						<h2>Javascript execution</h2>
-						<ul>
-							<li class="fragment">
-								Execution context
-								<pre><code data-trim contenteditable>
-function adder(base) {
-  return function(num) {
-    return base + num;
-  };
-}
-								</pre></code>
-							</li>
-							<li class="fragment">
-								Variable Object (Activation Object)
-							</li>
-							<li class="fragment">
-								Global Object
-							</li>
-						</ul>
-
-						<aside class="notes">
-							- a function's execution context delimits a function's scope and includes everything that's inside curly brackets ({}) in a function's definition (it's defined statically, based on how the code is written)<br/>
-							- An execution context has a variable object. Any variables and functions defined inside the function are added as properties on this object<br/>
-							- Before running any code, the JavaScript engine creates a global object whose initial properties are the built-ins defined by ECMAScript, such as Object, String, Array and others, in addition to host defined properties<br/>
-							- all these are NOT objects usable by your program, they're used by the javascript runtime to execute the code<br/>
-						</aside>
-					</section>
-					<section>
-						<h2>Javascript execution</h2>
-						<ol>
-							<li class="fragment highlight-current-blue">
-								For any formal parameters, add corresponding properties on the variable object and let their values be the values passed as arguments to the function.
-							</li>
-							<li class="fragment highlight-current-blue">
-								For any function declarations, add corresponding properties on the variable object whose values are the functions. If a function declaration uses the same identifier as one of the formal parameters, the property is overwritten.
-							</li>
-							<li class="fragment highlight-current-blue">
-								For any variable declarations, add corresponding properties on the variable object and initialize the properties to <code>undefined</code>, regardless of how the variables are initialized in source code. If a variable uses the same identifier as an already defined property (i.e., a parameter or function), do not overwrite it.
-							</li>
-						</ol>
-
-						<aside class="notes">
-							Now you undestand the behaviour seen previously. <br/>
-							Best practice to avoid problems: declare all variables at the start of a scope (i.e. a function)
-						</aside>
-					</section>
-				</section>
-
-				<section>
-					<h2>Scope Chain</h2>
-					<ul>
-						<li>
-							Whenever a function is called, control enters a new execution context.
-						</li>
-						<li class="fragment">
-							The activation object is used for identifier resolution inside the function. In fact, identifier resolution occurs through the scope chain, which starts with the activation object of the current execution context. At the end of the scope chain is the global object.
-						</li>
-					</ul>
-					<pre class="fragment"><code data-trim>
-function adder(base) {
-  return function(num) {
-    return base + num;
-  };
-}
-var inc = adder(1);
-console.log(inc(5));
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Javascript objects <span style="text-transform: none;">(intro)</span></h2>
-					<p>
-						Container of key-value pairs
-					</p>
-					<pre><code data-trim>
-var o1 = {
-  name: “circle”,
-  radius: 2,
-  diameter: function () { /* ... */ }
-};
-
-console.log(o1.name);
-
-var o2 = {
-  “invalid-key-constant”: “value”
-};
-
-console.log(o2[“invalid-key-constant”]);
-
-					</code></pre>
-				</section>
-
-				<section>
-					<section>
-						<h2>The <code style="text-transform: none;">this</code> keyword</h2>
-						<ul>
-							<li>
-								<code>this</code> is set implicitly when calling a function using parentheses
-							</li>
-							<li class="fragment">
-								calling it as a function causes <code>this</code> to be set to the global object
-
-								<pre><code data-trim contenteditable>
-var a = "a";
-
-function test() {
-  return this.a;
-}
-
-test();
-								</code></pre>
-							</li>
-						</ul>
-
-						<aside class="notes">
-							this is not caused by the fact that the "test" function is declared in the same scope of the "a" variable; show an example with a function defined inside "test" function
-						</aside>
-					</section>
-					<section>
-						<h2>The <code style="text-transform: none;">this</code> keyword</h2>
-						<ul>
-							<li>
-								calling it as a method causes <code>this</code> to be the object through which the function is called
-
-								<pre><code data-trim>
-var person = {
-  name: "World",
-  sayHi: function() {
-    return "Hello " + this.name;
-  }
-};
-
-person.sayHi();
-								</code></pre>
-							</li>
-							<li class="fragment">
-								allows JavaScript objects to share function objects and still have them execute on the right object
-
-								<pre><code data-trim>
-var person2 = {
-  name: "Gabriele",
-  sayHi: person.sayHi
-};
-
-person2.sayHi();
-								</code></pre>
-							</li>
-						</ul>
-					</section>
-					<section>
-						<h2>The <code style="text-transform: none;">this</code> keyword</h2>
-						<ul>
-							<li>Explicitly setting <code>this</code></li>
-							<pre style="width: 110%;"><code data-trim>
-person.sayHi.call({ name: "John" });
-							</code></pre>
-						</ul>
-					</section>
-				</section>
-
-				<section>
-					<h2>Javascript is single-threaded</h2>
-					<img height="420" src="http://ejohn.org/files/Timers.png" alt="Javascript timers">
-					<small>Image taken from <a href="http://ejohn.org/blog/how-javascript-timers-work/" target="_blank">http://ejohn.org/blog/how-javascript-timers-work/</a></small>
-				</section>
-
-				<section>
-					<h2>Closure</h2>
-
-					<pre><code data-trim>
-function adder(base) {
-  return function(num) {
-    return base + num;
-  };
-}
-					</pre></code>
-
-					<ul>
-						<li class="fragment">inside the anonymous function returned by <code>adder</code>, the <code>base</code> variable is known as a <em>free variable</em></li>
-						<li class="fragment">it lives on after the <code>adder</code> function has finished executing, as long as someone holds a reference to the returned function</li>
-					</ul>
-
-					<aside class="notes">
-						JavaScript supports nested functions, which allows for closures that can keep private state, and can be used to implement many useful patterns
-					</aside>
-				</section>
-
-				<section>
-					<h2>Stateful Functions</h2>
-
-					<ul>
-						<li>A closure can maintain state through its free variables.</li>
-						<li class="fragment">The scope chain that allows access to these free variables is only accessible from within the scope chain itself, which means that free variables by definition are <strong>private</strong>.</li>
-					</ul>
-
-					<pre class="fragment"><code data-trim>
-function uniqueIdGenerator(start) {
-  var currentId = start || 0;
-
-  return function() {
-    return currentId++;
-  }
-}
-					</pre></code>
-
-					<aside class="notes">
-						Every new execution of "uniqueIdGenerator" creates a new execution context and a new scope chain; this means that a generator's state cannot interfere with the state of a previously created generator
-					</aside>
-				</section>
-
-				<section>
-					<h2>Immediately Called Anonymous Functions</h2>
-
-					<pre><code data-trim>
-(function () {
-  /* ... */
-}());
-					</code></pre>
-
-					<ul>
-						<li class="fragment">avoid littering the global scope with temporary variables by simply wrapping our code in a self-executing closure</li>
-						<li class="fragment">simulate block scope</li>
-					</ul>
-
-					<pre class="fragment"><code data-trim>
-var names = ['John', 'Gabriele'];
-
-(function() {
-  var i;
-  for (i = 0; i < names.length; i++) {
-    console.log("Hello " + names[i]);
-  }
-}());
-
-console.log(i);
-					</code></pre>
-
-					<aside class="notes">
-						JavaScript only has global scope and function scope, we need to avoid leaking objects into the global scope because doing so increases our chances of naming collisions with other scripts (and bugs in our scripts)<br/>
-						This pattern is used EVERYWHERE, see some jQuery plugin (i.e. cycle jquery plugin)
-					</aside>
-				</section>
-
-				<section>
-					<h2>Namespaces</h2>
-
-					<p>
-						A good strategy to stay out of the global scope is to use some kind of namespacing
-					</p>
-
-					<pre class="fragment"><code data-trim>
-var reply = {
-  applicationConfig: {
-    config1: "...",
-    config2: 42
-  }
-  customCalendar: function() { /* ... */ }
-};
-					</code></pre>
-
-					<aside class="notes">
-						You could create your personal framework and it should have a single entry point stored inside the global object.<br/>
-						This pattern too is used EVERYWHERE (jQuery, Kendo, ...)
-					</aside>
 				</section>
 
 				<section>
@@ -564,12 +223,6 @@ var reply = {
 						</li>
 						<li><a href="https://developer.mozilla.org" target="_blank">https://developer.mozilla.org</a>
 					</ul>
-				</section>
-
-				<section>
-					<h2>Final quiz</h2>
-
-					<a href="">link to the quiz here!</a>
 				</section>
 
 			</div>
