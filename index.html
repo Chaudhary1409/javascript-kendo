@@ -265,16 +265,68 @@ kendo.ui.validator.messages.validName = "...";
 					</section>
 				</section>
 
-				<section>
-					MVVM (templates?!?)
-				</section>
+                <section>
+    				<section>
+    					<h2>MVVM</h2>
+    					<ul>
+    					    <li>out-of-the-box <a href="http://demos.kendoui.com/web/mvvm/index.html" target="_blank">two-way data-binding</a> between View and ViewModel</li>
+    					    <li class="fragment">many <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/text" target="_blank">pre-defined bindings</a> available</li>
+    					    <li class="fragment">integrated with Kendo <a href="http://demos.kendoui.com/web/mvvm/source.html" target="_blank">template engine</a></li>
+    					    <li class="fragment">it's easy to implement custom bindings</li>
+    					</ul>
+    				</section>
+    
+    				<section>
+    					<h2>One-way custom binding</h2>
+    					<pre><code data-trim>
+kendo.data.binders.slide = kendo.data.Binder.extend({
+  refresh: function() {
+    var value = this.bindings["slide"].get(),
+      content = $(this.element).find('.content');
+    
+    if (value) {
+      content.slideDown();
+    } else {
+      content.slideUp();
+    }
+  }
+});
+    					</code></pre>
+    				</section>
+    
+    				<section>
+    					<h2>Two-way custom binding</h2>
+    					<pre><code data-trim>
+kendo.data.binders.slide = kendo.data.Binder.extend({
+  init: function(element, bindings, options) {
+    /* call the base constructor */
+    kendo.data.Binder.fn.init.call(this, element, bindings, options);
 
-				<section>
-					Create a custom binding (only refresh)
-				</section>
-
-				<section>
-					Create a custom binding (refresh and change)
+    var that = this;
+    /* listen for the change event of the element */
+    $(that.element).on("click", function() {
+      that.change(); /* call the change function */
+    });
+  },
+  refresh: function() {
+    var value = this.bindings["slide"].get(),
+      content = $(this.element).find('.content');
+    
+    if (value) {
+      content.slideDown();
+    } else {
+      content.slideUp();
+    }
+  },
+  change: function() {
+    var value = this.bindings["slide"].get();
+    
+    /* update the View-Model */
+    this.bindings["slide"].set(!value);
+  }
+});
+    					</code></pre>
+    				</section>
 				</section>
 
 				<section>
