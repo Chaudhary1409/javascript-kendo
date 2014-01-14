@@ -292,6 +292,11 @@ kendo.data.binders.slide = kendo.data.Binder.extend({
   }
 });
     					</code></pre>
+
+						<p>
+							<a href="http://jsfiddle.net/redaemn/DDy5r/" target="_blank">Live DEMO!</a>
+						</p>
+
     				</section>
     
     				<section>
@@ -326,6 +331,11 @@ kendo.data.binders.slide = kendo.data.Binder.extend({
   }
 });
     					</code></pre>
+
+						<p>
+							<a href="http://jsfiddle.net/redaemn/u96Uq/" target="_blank">Live DEMO!</a>
+						</p>
+
     				</section>
 				</section>
 
@@ -398,6 +408,42 @@ var Rating = WIDGET.extend({
 
 					<section>
 						<h2>Creating a custom widget</h2>
+						<p>Widget style</p>
+						<pre><code data-trim>
+.reply-rating {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  cursor: default;
+  display: inline-block;
+}
+
+.reply-rating li {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.reply-rating li.reply-rating-star-full:after {
+    content: "\2605";
+    font-family: Arial;
+    font-size: 16px;
+    color: orange;
+}
+
+.reply-rating li.reply-rating-star-empty:after {
+    content: "\2606";
+    font-family: Arial;
+    font-size: 16px;
+    color: gray;
+}
+
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Creating a custom widget</h2>
 						<p>First version of the widget</p>
 						<pre><code data-trim>
 (function($, kendo, undefined) {
@@ -422,7 +468,9 @@ var Rating = WIDGET.extend({
       options = that.options;
       
       element.addClass(REPLY_RATING)
-        .on(MOUSEOVER + NS, STAR, PROXY(that._mouseover, that))
+        .on(MOUSEOVER + NS, STAR, function(e) {
+          that._mouseover(e);
+        })
         .on(MOUSELEAVE + NS, PROXY(that._mouseleave, that))
         .on(CLICK + NS, STAR, PROXY(that._select, that));
       element.find(STAR).addClass(options.starEmptyClass);
@@ -500,60 +548,100 @@ var Rating = WIDGET.extend({
   
 })(window.jQuery, window.kendo);
 						</code></pre>
-					</section>
 
-					<section>
-						<h2>Creating a custom widget</h2>
-						<p>CSS</p>
-						<pre><code data-trim>
-.reply-rating {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  cursor: default;
-  display: inline-block;
-}
+						<p>
+							<a href="http://jsfiddle.net/redaemn/qDb7A/" target="_blank">Live DEMO!</a>
+						</p>
 
-.reply-rating li {
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.reply-rating li.reply-rating-star-full:after {
-    content: "\2605";
-    font-family: Arial;
-    font-size: 16px;
-    color: orange;
-}
-
-.reply-rating li.reply-rating-star-empty:after {
-    content: "\2606";
-    font-family: Arial;
-    font-size: 16px;
-    color: gray;
-}
-
-						</code></pre>
+						<aside class="notes">
+							In the constructor, highlight the benefit of "var that = this" inside the "mouseover" handler
+						</aside>
 					</section>
 
 					<section>
 						<h2>Creating a custom widget</h2>
 						<p>Adding events</p>
 						<pre><code data-trim>
+(function($, kendo, undefined) {
+
+  var SELECT = "select",
+    MOUSEOVER = "mouseover",
+    MOUSELEAVE = "mouseleave";
+    
+  var Rating = WIDGET.extend({
+    
+    /* ... */
+    
+    events: [
+      MOUSEOVER,
+      MOUSELEAVE,
+      SELECT
+    ],
+    
+    _mouseover: function(e) {
+      var that = this,
+        star = $(e.currentTarget),
+        value = star.data('value');
+      
+      that._render(value);
+      that.trigger(MOUSEOVER, { value: value, item: star });
+    },
+    
+    _mouseleave: function() {
+      var that = this;
+      
+      that._render(that.value());
+      that.trigger(MOUSELEAVE);
+    },
+    
+    _select: function(e) {
+      var that = this,
+        star = $(e.currentTarget),
+        value = star.data('value');
+      
+      that.value(value);
+      that.trigger(SELECT, { value: value, item: star });
+    }
+  });
+  
+  kendo.ui.plugin(Rating, kendo.ui, PREFIX);
+  
+})(window.jQuery, window.kendo);
+						</code></pre>
+
+						<aside class="notes">
+							talk about observer class implemented by kendo
+						</aside>
+					</section>
+
+					<section>
+						<h2>Using widget events</h2>
+						<pre><code data-trim>
+/* attach handler at widget creation */
+var ratingWidget = $('.star-rating').kendoReplyRating({
+  mouseover: function(e) {
+    /* do something here */
+  }
+}).data('kendoReplyRating');
+
+/* attach handler after widget creation */
+ratingWidget.bind('select', function(e) {
+  /* do something here */
+});
+						</code></pre>
+
+						<p>
+							<a href="http://jsfiddle.net/redaemn/nNyMp/" target="_blank">Live DEMO!</a>
+						</p>
+					</section>
+
+					<section>
+						<h2>Creating a custom widget</h2>
+						<p>MVVM aware widgets</p>
+						<pre><code data-trim>
 
 						</code></pre>
 					</section>
-				</section>
-
-				<section>
-					Add event handling
-					- talk about observer class implemented by kendo
-				</section>
-
-				<section>
-					Add MVVM to a custom widget (rating value)
 				</section>
 
 				<section>
