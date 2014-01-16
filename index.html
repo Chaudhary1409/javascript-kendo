@@ -187,17 +187,23 @@ var window = createWindow({
 							how to use a widget:
 							<pre><code data-trim>
 $("#dialog").kendoWindow({
-  height: 600,
+  height: 400,
   width: 400,
   title: "Window title",
   actions: [ "Close", "Maximize" ],
-  modal: true
+  modal: true,
+  visible: false
 });
 
 var dialog = $("#dialog").data('kendoWindow');
 
-dialog.close();
+dialog.open();
 							</code></pre>
+							
+							<p style="text-align: center;">
+    							<a href="http://jsfiddle.net/redaemn/3TMtC/" target="_blank">Live DEMO!</a>
+    						</p>
+							
 						</li>
 					</ul>
 				</section>
@@ -216,11 +222,11 @@ dialog.close();
 								easy to use
 								<pre><code data-trim>
 <form id="myForm">
-  <input type="text" name="name" required>
+  <input type="text" name="name" required />
 </form>
 								</code></pre>
 								<pre><code data-trim>
-var validator = $("#myform").kendoValidator().data('kendoValidator');
+var validator = $("#myForm").kendoValidator().data('kendoValidator');
 
 validator.validate();
 								</code></pre>
@@ -254,6 +260,11 @@ $("#myform").kendoValidator({
 
 });
 						</code></pre>
+						
+						<p>
+    							<a href="http://jsfiddle.net/redaemn/ccEXZ/" target="_blank">Live DEMO!</a>
+    						</p>
+						
 						<div class="fragment">
 							<p>Make it reusable:</p>
 							<pre><code data-trim>
