@@ -650,8 +650,38 @@ ratingWidget.bind('select', function(e) {
 						<h2>Creating a custom widget</h2>
 						<p>MVVM aware widgets</p>
 						<pre><code data-trim>
+(function($, kendo, undefined) {
 
+  var CHANGE = "change";
+    
+  var Rating = WIDGET.extend({
+    
+    /* ... */
+    
+    events: [
+      /* ... */
+      CHANGE
+    ],
+    
+    value: function(value) {
+      /* ... */
+    },
+    
+    _select: function(e) {
+      /* ... */
+      that.trigger(CHANGE);
+    }
+  });
+  
+  kendo.ui.plugin(Rating, kendo.ui, PREFIX);
+  
+})(window.jQuery, window.kendo);
 						</code></pre>
+						
+						<p>
+							<a href="http://jsfiddle.net/redaemn/frzuJ/" target="_blank">Live DEMO!</a>
+						</p>
+						
 					</section>
 				</section>
 
