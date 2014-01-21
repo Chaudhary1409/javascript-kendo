@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 				options: {
 					port: port,
 					base: '.',
-					livereload: process.env.C9_PROJECT ? 16001 : true
+					livereload: process.env.C9_PROJECT ? false : true
 				}
 			}
 		},
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 			presentation: {
 				files: [ 'index.html' ],
 				options: {
-					livereload: process.env.C9_PROJECT ? 16001 : true
+					livereload: process.env.C9_PROJECT ? false : true
 				}
 			}
 		}
