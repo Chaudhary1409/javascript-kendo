@@ -74,9 +74,30 @@
 				</section>
 
 				<section>
+					<h2>Presentation goal</h2>
+					<ul>
+						<li class="fragment">Highlight the <strong>main features</strong> that Kendo UI Web framework has to offer</li>
+						<li class="fragment">Show how it is possible to extend the framework with <strong>custom features</strong></li>
+						<li class="fragment">Learn from Kendo UI code how to write <strong>better JavaScript</strong> code</li>
+					</ul>
+				</section>
+
+				<section>
 					<h2>Javascript objects <span style="text-transform: none;">(advanced)</span></h2>
-					<p>
-						JavaScript’s inheritance model is fundamentally different from classical inheritance, in which classes inherit from other classes, and objects constitute instances of classes.
+					<p class="fragment">
+						JavaScript’s inheritance model is fundamentally <strong>different from classical inheritance</strong>, in which classes inherit from other classes, and objects constitute instances of classes.
+					</p>
+					<p class="fragment">
+						JavaScript <strong>does not have classes</strong>. Instead, JavaScript offers <strong>prototypes</strong> and <strong>prototype-based inheritance</strong> in which objects inherit from other objects.
+					</p>
+					<p class="fragment">
+						It is possible to implement differt types of inheritance, based on your particular needs (<em>Pseudo-classical Inheritance, Private Members and Privileged Methods, &hellip;</em>)
+					</p>
+					<p class="fragment">
+						But this is another story, maybe in the next presentation :)
+					</p>
+					<p class="fragment">
+						Many frameworks (Kendo among them) offer their own implementation
 					</p>
 				</section>
 
@@ -98,7 +119,7 @@ var window = createWindow(50, 50, true, true, false);
 								when calling the function, the API is cryptic
 							</li>
 							<li class="fragment">
-								parameters must be passed in the correct order, otherwise <strong>bug</strong>
+								parameters must be passed in the correct order (easy to introduce <strong>bugs</strong>)
 							</li>
 							<li class="fragment">
 								when the API changes, new parameters can only be added at the end to avoid braking existing code
@@ -689,10 +710,10 @@ ratingWidget.bind('select', function(e) {
 					<h2>Resources and Credits</h2>
 					<small><em>(in random order)</em></small>
 					<ul>
-						<!--<li>-->
-						<!--	<strong>Test-Driven JavaScript Development</strong> <em>by Christian Johansen</em>-->
-						<!--	(<a href="http://tddjs.com/" target="_blank">http://tddjs.com/</a>)-->
-						<!--</li>-->
+						<li>
+							<strong>Test-Driven JavaScript Development</strong> <em>by Christian Johansen</em>
+							(<a href="http://tddjs.com/" target="_blank">http://tddjs.com/</a>)
+						</li>
 						<li>Kendo UI Web demos (<a href="http://demos.kendoui.com/web/overview/index.html" target="_blank">http://demos.kendoui.com/web/overview/index.html</a>)</li>
 						<li>Kendo UI API, Getting Started, How Tos and Tutorials (<a href="http://docs.kendoui.com/api/introduction" target="_blank">http://docs.kendoui.com/api/introduction</a>)</li>
 					</ul>
